@@ -3,9 +3,11 @@
 Tredo is a gem that acts a seam to some TODO list provider (think Trello, TODOist, RememberTheMilk).
 At present it currently supports Trello and as more providers are supported, so to will the facade mature.
 
-The intent is that this seam would affirm the business domain language (create_todo and todo_list) by keeping it consistent. But also masking the complexity of different providers in implementation and language.
-
-The intended use case for Tredo is as a gem in a Component Based Rails Application (engine).
+- The intent is that the gem would act as seam (for replacement, microservice etc).
+- It also aims to affirm the business domain language (create_todo and todo_list) by keeping it consistent through it's main interface (Tredo.class).
+- It also aims to mask the complexity of different providers in implementation and language.
+- Lastly it also tries to be agnostic to REST Provider by leveraging off the Provider model pattern allowing you to leverage [rest-client](https://github.com/rest-client/rest-client), [faraday](https://github.com/lostisland/faraday) or [http party](https://github.com/jnunemaker/httparty).
+- The intended use case for Tredo is as a gem in a Component Based Rails Application (engine).
 
 ## Status: Unpublished to RubyGems 🧨
 
