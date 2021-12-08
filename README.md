@@ -1,4 +1,4 @@
-# Tredo
+# Tredo 🌈
 
 Tredo is a gem that acts a seam to some TODO list provider (think Trello, TODOist, RememberTheMilk).
 At present it currently supports Trello and as more providers are supported, so to will the facade mature.
@@ -6,6 +6,8 @@ At present it currently supports Trello and as more providers are supported, so 
 The intent is that this seam would affirm the business domain language (create_todo and todo_list) by keeping it consistent. But also masking the complexity of different providers in implementation and language.
 
 The intended use case for Tredo is as a gem in a Component Based Rails Application (engine).
+
+## Status: Unpublished to RubyGems 🧨
 
 ## Installation
 
