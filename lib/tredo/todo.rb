@@ -1,7 +1,6 @@
 # lib/todo.rb
 require "rest-client"
 require "jsender"
-require "tredo/restprovider"
 
 module Tredo
   class Todo
@@ -9,10 +8,12 @@ module Tredo
     LIST_ID = "61af9e0503811b04f6771d01".freeze
     BASE_URL = "https://api.trello.com/1".freeze
 
+    attr_accessor :token, :key
+
     def initialize(restclient)
       @restprovider = restclient
-      @token = ENV.fetch("PROVIDER_TOKEN")
-      @key = ENV.fetch("PROVIDER_KEY")
+      @token = token.nil? ? token : ENV.fetch("PROVIDER_TOKEN")
+      @key = key.nil? ? key : ENV.fetch("PROVIDER_KEY")
     end
 
     def create_card(name)

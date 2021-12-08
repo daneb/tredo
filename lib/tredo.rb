@@ -4,7 +4,7 @@ require_relative "tredo/version"
 require "tredo/restprovider"
 
 module Tredo
-  def self.create_task(name)
+  def self.create_todo(name)
     restclient = RestProvider.new
     todo = Todo.new(restclient)
     todo.create_card(name)
