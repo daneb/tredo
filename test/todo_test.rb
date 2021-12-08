@@ -9,9 +9,7 @@ class TodoTest < MiniTest::Test
     restclient = MiniTest::Mock.new
     response = DummyResponse.new(200, "Created")
     restclient.expect :post, response, [String, Hash]
-    todo = Tredo::Todo.new(restclient)
-    todo.token = "some_token"
-    todo.key = "some_key"
+    todo = Tredo::Todo.new(restclient, "some_token", "some_key")
 
     result = JSON.parse(todo.create_card("hello"))
 
@@ -22,17 +20,49 @@ class TodoTest < MiniTest::Test
 
   def test_failed_task_creation
     restclient = MiniTest::Mock.new
-    response = DummyErrorResponse.new(500, "Failed to create task.")
+    response = DummyErrorResponse.new(500, "Internal Error Yikes!")
     restclient.expect :post, response, [String, Hash]
-    todo = Tredo::Todo.new(restclient)
-    todo.token = "some_token"
-    todo.key = "some_key"
+    todo = Tredo::Todo.new(restclient, "some_token", "some_key")
 
     result = JSON.parse(todo.create_card("hello"))
 
     assert_equal result["status"], "error"
-    assert_equal result["message"], "Failed to create task."
+    assert_equal result["message"], "Failed to create todo."
     restclient.verify
+  end
+
+  def test_success_get_lists
+    restclient = MiniTest::Mock.new
+    response = DummyResponse.new(200, "Some Fake List")
+    restclient.expect :get, response, [String]
+    todo = Tredo::Todo.new(restclient, "some_token", "some_key")
+
+    result = JSON.parse(todo.lists)
+
+    assert_equal result["status"], "success"
+    assert_equal result["data"]["result"], "Some Fake List"
+    restclient.verify
+  end
+
+  def test_failure_getting_lists
+    restclient = MiniTest::Mock.new
+    response = DummyErrorResponse.new(500, "Internal Error Yikes!")
+    restclient.expect :get, response, [String]
+    todo = Tredo::Todo.new(restclient, "some_token", "some_key")
+
+    result = JSON.parse(todo.lists)
+
+    assert_equal result["status"], "error"
+    assert_equal result["message"], "Failed to retrieve lists."
+    restclient.verify
+  end
+
+  def test_missing_auth_keys
+    todo = Tredo::Todo.new(nil)
+    result = JSON.parse(todo.create_card("hello"))
+
+    assert_equal result["status"], "error"
+    assert_equal result["message"], "Missing Token or Key"
   end
 end
 
