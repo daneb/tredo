@@ -1,8 +1,11 @@
 # Tredo
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tredo`. To experiment with that code, run `bin/console` for an interactive prompt.
+Tredo is a gem that acts a seam to some TODO list provider (think Trello, TODOist, RememberTheMilk).
+At present it currently supports Trello and as more providers are supported, so to will the facade mature.
 
-TODO: Delete this and the text above, and describe your gem
+The intent is that this seam would affirm the business domain language (create_todo and todo_list) by keeping it consistent. But also masking the complexity of different providers in implementation and language.
+
+The intended use case for Tredo is as a gem in a Component Based Rails Application (engine).
 
 ## Installation
 
