@@ -18,6 +18,7 @@ module Tredo
 
     def create_card(name)
       return error("Missing Token or Key") if invalid_auth?
+      return error("Card name is empty") if name.nil? || name.empty?
 
       url = "#{BASE_URL}/cards"
       response = @restprovider.post url, idList: LIST_ID, token: @token, key: @key, name: name
