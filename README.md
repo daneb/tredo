@@ -9,7 +9,7 @@ At present it currently supports Trello and as more providers are supported, so 
 - Lastly it also tries to be agnostic to REST Provider by leveraging off the Provider model pattern allowing you to leverage [rest-client](https://github.com/rest-client/rest-client), [faraday](https://github.com/lostisland/faraday) or [http party](https://github.com/jnunemaker/httparty).
 - The intended use case for Tredo is as a gem in a Component Based Rails Application (engine).
 
-## Status: Unpublished to RubyGems 🧨
+## Status: Published to [RubyGems](https://rubygems.org/gems/tredo) 🧨
 
 ## Installation
 
