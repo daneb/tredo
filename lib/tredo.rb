@@ -15,6 +15,12 @@ module Tredo
     todo = Todo.new(restclient)
     todo.lists
   end
+
+  def self.todos_for_list(list_id)
+    restclient = RestProvider.new
+    todo = Todo.new(restclient)
+    todo.actions(list_id)
+  end
 end
 
 require "tredo/todo"

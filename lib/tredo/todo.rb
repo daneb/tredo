@@ -45,6 +45,21 @@ module Tredo
       error("Bad request")
     end
 
+    def actions(list_id)
+      return error(message: "Missing Token or Key") if invalid_auth?
+      return error("List Id cannot be nil or empty") if list_id.nil? || list_id.empty?
+
+      url = "#{BASE_URL}/lists/#{list_id}/actions?token=#{@token}&key=#{@key}"
+      response = @restprovider.get url
+      return error("Failed to retrieve actions for list.") if response.code != 200
+
+      Jsender::Json.success(data: { "result" => response.body })
+    rescue RestClient::Unauthorized
+      error("Unauthorized access.")
+    rescue RestClient::BadRequest
+      error("Bad request")
+    end
+
     private
 
     def error(message)
