@@ -19,7 +19,7 @@ module Tredo
   def self.todos_for_list(list_id)
     restclient = RestProvider.new
     todo = Todo.new(restclient)
-    todo.actions(list_id)
+    todo.cards(list_id)
   end
 end
 

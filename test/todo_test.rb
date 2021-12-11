@@ -61,32 +61,32 @@ class TodoTest < MiniTest::Test
     end
   end
 
-  describe "when getting actions from a list" do
+  describe "when getting cards from a list" do
     def test_success
       fake_listid = "61af9e0503811b04f6771d01"
       restclient = MiniTest::Mock.new
-      response = DummyResponse.new(200, "Some Fake Actions")
+      response = DummyResponse.new(200, "Some Fake Cards")
       restclient.expect :get, response, [String]
       todo = Tredo::Todo.new(restclient, "some_token", "some_key")
 
-      result = JSON.parse(todo.actions(fake_listid))
+      result = JSON.parse(todo.cards(fake_listid))
 
       assert_equal result["status"], "success"
-      assert_equal result["data"]["result"], "Some Fake Actions"
+      assert_equal result["data"]["result"], "Some Fake Cards"
       restclient.verify
     end
 
-    def test_failure_getting_actions
+    def test_failure_getting_cards
       fake_listid = "61af9e0503811b04f6771d01"
       restclient = MiniTest::Mock.new
       response = DummyErrorResponse.new(500, "Internal Error Yikes!")
       restclient.expect :get, response, [String]
       todo = Tredo::Todo.new(restclient, "some_token", "some_key")
 
-      result = JSON.parse(todo.actions(fake_listid))
+      result = JSON.parse(todo.cards(fake_listid))
 
       assert_equal result["status"], "error"
-      assert_equal result["message"], "Failed to retrieve actions for list."
+      assert_equal result["message"], "Failed to retrieve cards for list."
       restclient.verify
     end
   end
