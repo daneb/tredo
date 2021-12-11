@@ -10,10 +10,10 @@ module Tredo
 
     attr_reader :token, :key
 
-    def initialize(restclient, test_token = nil, test_key = nil)
+    def initialize(restclient, token = nil, key = nil)
       @restprovider = restclient
-      @token = test_token ||= ENV["PROVIDER_TOKEN"]
-      @key = test_key ||= ENV["PROVIDER_KEY"]
+      @token = token ||= ENV["PROVIDER_TOKEN"]
+      @key = key ||= ENV["PROVIDER_KEY"]
     end
 
     def create_card(name)

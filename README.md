@@ -29,7 +29,7 @@ Or install it yourself as:
 
 ## Usage
 
-### Requires two environment variables:
+### Requires two environment variables OR token & key passed in via method calls
 
 ```bash
 export PROVIDER_KEY=<trello-api-key>

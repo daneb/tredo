@@ -4,21 +4,21 @@ require_relative "tredo/version"
 require "tredo/restprovider"
 
 module Tredo
-  def self.create_todo(name)
+  def self.create_todo(name, token = nil, key = nil)
     restclient = RestProvider.new
-    todo = Todo.new(restclient)
+    todo = Todo.new(restclient, token, key)
     todo.create_card(name)
   end
 
-  def self.todo_lists
+  def self.todo_lists(token = nil, key = nil)
     restclient = RestProvider.new
-    todo = Todo.new(restclient)
+    todo = Todo.new(restclient, token, key)
     todo.lists
   end
 
-  def self.todos_for_list(list_id)
+  def self.todos_for_list(list_id, token = nil, key = nil)
     restclient = RestProvider.new
-    todo = Todo.new(restclient)
+    todo = Todo.new(restclient, token, key)
     todo.cards(list_id)
   end
 end
